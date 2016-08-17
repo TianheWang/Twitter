@@ -102,7 +102,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="hxs-gh-KhD"/>
+                    <navigationItem key="navigationItem" id="hxs-gh-KhD">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="hYd-yU-Yj0">
+                            <connections>
+                                <action selector="onLogouButton:" destination="5U8-6D-W1Y" id="681-eD-7lH"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wUR-fD-AKx" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -112,7 +118,7 @@
         <!--Navigation Controller-->
         <scene sceneID="kSG-j9-qZf">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mUy-Ou-GlM" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="TweetsNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="mUy-Ou-GlM" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="9bF-QX-iHg">
