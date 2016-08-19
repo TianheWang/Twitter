@@ -18,7 +18,11 @@ class TweetCell: UITableViewCell {
     // @IBOutlet weak var tweetImage: UIImageView!
     @IBOutlet weak var replyButton: UIButton!
     @IBOutlet weak var retweetButton: UIButton!
-    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var favoriteButton: UIButton!
+    @IBOutlet weak var retweetCount: UILabel!
+    @IBOutlet weak var favoriteCount: UILabel!
+
+
 
     var tweet: Tweet! {
         didSet {
@@ -34,6 +38,23 @@ class TweetCell: UITableViewCell {
 //            let now: NSDate = NSDate()
 
             tweetText.text = tweet.text as? String
+            if tweet.retweetCount == nil && tweet.retweetCount == 0 {
+                retweetCount.hidden = true
+            } else {
+                retweetCount.hidden = false
+                retweetCount.text = "\(tweet.retweetCount!)"
+            }
+
+            if let tweetFavCount = tweet.favoritesCount {
+                if tweetFavCount == 0 {
+                    favoriteCount.hidden = true
+                } else {
+                    favoriteCount.hidden = false
+                    favoriteCount.text = "\(tweet.favoritesCount!)"
+                }
+            } else {
+                favoriteCount.hidden = true
+            }
         }
     }
 
