@@ -10,10 +10,31 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
+    @IBOutlet weak var backgroundImage: UIImageView!
+    @IBOutlet weak var profileHeaderView: UIView!
+
+    @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var userName: UILabel!
+    @IBOutlet weak var userHandle: UILabel!
+
+    var user: User! {
+        didSet {
+            view.layoutIfNeeded()
+            if let backgroundImageUrl = user.backgroundImageUrl {
+                backgroundImage.setImageWithURL(backgroundImageUrl)
+            }
+            if let profileImageUrl = user.profileUrl {
+                profileImage.setImageWithURL(profileImageUrl)
+            }
+            userName.text = user.name!
+            userHandle.text = "@\(user.screenName!)"
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
+
     }
 
     override func didReceiveMemoryWarning() {

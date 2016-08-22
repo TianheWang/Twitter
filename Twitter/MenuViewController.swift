@@ -18,8 +18,8 @@ class MenuViewController: UIViewController, UITableViewDelegate {
         }
     }
 
-    private var tweetsViewController: UINavigationController!
-    private var profileViewController: UINavigationController!
+    private var tweetsViewNavigationController: UINavigationController!
+    private var profileViewNavigationController: UINavigationController!
 
     var viewControllers: [UINavigationController] = []
     let titles: [String] = ["Home", "Profile"]
@@ -30,12 +30,14 @@ class MenuViewController: UIViewController, UITableViewDelegate {
         tableView.delegate = self
 
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-        tweetsViewController = storyBoard.instantiateViewControllerWithIdentifier("TweetsNavigationController") as! UINavigationController
-        profileViewController = storyBoard.instantiateViewControllerWithIdentifier("ProfileNavigationController") as! UINavigationController
-        viewControllers.append(tweetsViewController)
-        viewControllers.append(profileViewController)
+        tweetsViewNavigationController = storyBoard.instantiateViewControllerWithIdentifier("TweetsNavigationController") as! UINavigationController
+        profileViewNavigationController = storyBoard.instantiateViewControllerWithIdentifier("ProfileNavigationController") as! UINavigationController
+        let profileViewController = profileViewNavigationController.topViewController as! ProfileViewController
+        profileViewController.user = User.currentUser
+        viewControllers.append(tweetsViewNavigationController)
+        viewControllers.append(profileViewNavigationController)
 
-        hamburgerViewController.contentViewController = tweetsViewController
+        hamburgerViewController.contentViewController = tweetsViewNavigationController
 
         // Do any additional setup after loading the view.
     }

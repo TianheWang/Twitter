@@ -9,11 +9,12 @@
 import UIKit
 
 class User: NSObject {
-    var name: NSString?
-    var screenName: NSString?
+    var name: String?
+    var screenName: String?
     var profileUrl: NSURL?
-    var tagLine: NSString?
+    var tagLine: String?
     var userData: NSDictionary?
+    var backgroundImageUrl: NSURL?
 
     init(dictionary: NSDictionary) {
         userData = dictionary
@@ -24,6 +25,10 @@ class User: NSObject {
             profileUrl = NSURL(string: profileUrlString)
         }
         tagLine = dictionary["description"] as? String
+        let backgroundURL = dictionary["profile_banner_url"] as? String
+        if let backgroundURL = backgroundURL {
+            backgroundImageUrl = NSURL(string: backgroundURL)
+        }
     }
 
     static var _currrentUser: User?

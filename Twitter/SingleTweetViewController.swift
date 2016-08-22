@@ -27,9 +27,9 @@ class SingleTweetViewController: UIViewController {
         super.viewDidLoad()
 
         profileImage.setImageWithURL((tweet?.user?.profileUrl)!)
-        userName.text = tweet?.user?.name as? String
-        let userHandleString = tweet?.user?.screenName as? String
-        userHandle.text = "@\(userHandleString!)"
+        userName.text = (tweet?.user?.name!)! as String
+        let userHandleString = (tweet?.user?.screenName!)! as String
+        userHandle.text = "@\(userHandleString)"
         tweetText.text = tweet?.text as? String
         favoriteCount.text = "\((tweet?.favoritesCount)!)"
         retweetCount.text = "\((tweet?.retweetCount)!)"

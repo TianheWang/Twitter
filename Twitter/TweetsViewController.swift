@@ -70,6 +70,11 @@ class TweetsViewController: UIViewController {
             let newTweetViewController = navigationController.topViewController as! NewTweetViewController
             newTweetViewController.prefix = prefix
             break
+        case "profileSegue":
+            let cell = sender as! TweetCell
+            let user = cell.tweet.user
+            let profileViewController = segue.destinationViewController as! ProfileViewController
+            profileViewController.user = user
         default:
             return
         }
@@ -196,6 +201,7 @@ extension TweetsViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCellWithIdentifier("tweetCell", forIndexPath: indexPath) as! TweetCell
         cell.tweet = tweets[indexPath.row]
         cell.accessoryType = UITableViewCellAccessoryType.None
+        cell.navigationController = navigationController
         return cell
     }
 }

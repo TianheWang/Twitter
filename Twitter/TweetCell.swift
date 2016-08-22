@@ -22,7 +22,7 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var retweetCount: UILabel!
     @IBOutlet weak var favoriteCount: UILabel!
 
-
+    var navigationController: UINavigationController?
 
     var tweet: Tweet! {
         didSet {
@@ -30,8 +30,8 @@ class TweetCell: UITableViewCell {
                 if let image_url = user.profileUrl {
                     profileImage.setImageWithURL(image_url)
                 }
-                userName.text = user.name as? String
-                let handle = user.screenName as? String
+                userName.text = user.name! as? String
+                let handle = user.screenName! as? String
                 userHandle.text = "@\(handle!)"
             }
 
@@ -83,8 +83,10 @@ class TweetCell: UITableViewCell {
         super.awakeFromNib()
         profileImage.layer.cornerRadius = 5
         profileImage.clipsToBounds = true
-//        tweetText.preferredMaxLayoutWidth = tweetText.frame.size.width
-        // Initialization code
+
+        let profileTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(TweetCell.onProfileTap))
+        profileImage.userInteractionEnabled = true
+        profileImage.addGestureRecognizer(profileTapRecognizer)
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -93,4 +95,13 @@ class TweetCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    func onProfileTap() {
+        print("called")
+        guard let navigationController = navigationController else {return}
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let profileNavigationController = storyboard.instantiateViewControllerWithIdentifier("ProfileNavigationController") as! UINavigationController
+        let profileViewController = profileNavigationController.topViewController as! ProfileViewController
+        profileViewController.user = tweet.user
+        navigationController.topViewController!.performSegueWithIdentifier("profileSegue", sender: self)
+    }
 }
