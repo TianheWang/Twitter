@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TweetsViewController: UIViewController, UITableViewDelegate {
+class TweetsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -53,6 +53,126 @@ class TweetsViewController: UIViewController, UITableViewDelegate {
                 print(error.localizedDescription)
         })
     }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        switch segue.identifier! {
+        case "singleTweetSegue":
+            let cell = sender as! TweetCell
+            let singleTweetViewController = segue.destinationViewController as! SingleTweetViewController
+            singleTweetViewController.tweet = cell.tweet
+        case "newTweetSegue":
+            break
+        default:
+            return
+        }
+
+    }
+
+    
+    @IBAction func onRetweetButton(sender: AnyObject) {
+        let retweetButton = sender as! UIButton
+        let cell = retweetButton.superview?.superview as! TweetCell
+        let tweet = cell.tweet
+        if let tweet = tweet {
+            if !(tweet.retweeted!) {
+                TwitterClient.sharedInstance.retweet(
+                    (tweet.id)!,
+                    success: {() -> () in
+                        TwitterClient.sharedInstance.getTweet(
+                            tweet.id!,
+                            success: { (updatedTweet: Tweet) -> () in
+                                let indexPath = self.tableView.indexPathForCell(cell)
+                                self.tweets[indexPath!.row] = updatedTweet
+                                self.tableView.reloadRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Fade)
+                            },
+                            failure: { (error: NSError) -> () in
+                                print(error.localizedDescription)
+                            }
+                        )
+                    },
+                    failure: { (error: NSError) -> () in
+                        print(error.localizedDescription)
+                    }
+                )
+            } else {
+                TwitterClient.sharedInstance.unretweet(
+                    (tweet.id)!,
+                    success: {() -> () in
+                        TwitterClient.sharedInstance.getTweet(
+                            tweet.id!,
+                            success: { (updatedTweet: Tweet) -> () in
+                                let indexPath = self.tableView.indexPathForCell(cell)
+                                self.tweets[indexPath!.row] = updatedTweet
+                                self.tableView.reloadRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Fade)
+                            },
+                            failure: { (error: NSError) -> () in
+                                print(error.localizedDescription)
+                            }
+                        )
+                    },
+                    failure: { (error: NSError) -> () in
+                        print(error.localizedDescription)
+                    }
+                )
+            }
+        }
+    }
+
+    @IBAction func onFavoriteButton(sender: AnyObject) {
+        let favButton = sender as! UIButton
+        let cell = favButton.superview?.superview as! TweetCell
+        let tweet = cell.tweet
+        if let tweet = tweet {
+            if !(tweet.favorited!) {
+                TwitterClient.sharedInstance.favorite(
+                    (tweet.id)!,
+                    success: {() -> () in
+                        TwitterClient.sharedInstance.getTweet(
+                            tweet.id!,
+                            success: { (updatedTweet: Tweet) -> () in
+                                let indexPath = self.tableView.indexPathForCell(cell)
+                                self.tweets[indexPath!.row] = updatedTweet
+                                self.tableView.reloadRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Fade)
+                            },
+                            failure: { (error: NSError) -> () in
+                                print(error.localizedDescription)
+                            }
+                        )
+                    },
+                    failure: { (error: NSError) -> () in
+                        print(error.localizedDescription)
+                    }
+                )
+            } else {
+                TwitterClient.sharedInstance.unfavorite(
+                    (tweet.id)!,
+                    success: {() -> () in
+                        TwitterClient.sharedInstance.getTweet(
+                            tweet.id!,
+                            success: { (updatedTweet: Tweet) -> () in
+                                let indexPath = self.tableView.indexPathForCell(cell)
+                                self.tweets[indexPath!.row] = updatedTweet
+                                self.tableView.reloadRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Fade)
+                            },
+                            failure: { (error: NSError) -> () in
+                                print(error.localizedDescription)
+                            }
+                        )
+                    },
+                    failure: { (error: NSError) -> () in
+                        print(error.localizedDescription)
+                    }
+                )
+            }
+        }
+    }
+    
+}
+
+extension TweetsViewController: UITableViewDelegate {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
 }
 
 extension TweetsViewController: UITableViewDataSource {
@@ -64,10 +184,10 @@ extension TweetsViewController: UITableViewDataSource {
         }
     }
 
-
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("tweetCell", forIndexPath: indexPath) as! TweetCell
         cell.tweet = tweets[indexPath.row]
+        cell.accessoryType = UITableViewCellAccessoryType.None
         return cell
     }
 }

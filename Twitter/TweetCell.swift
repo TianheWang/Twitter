@@ -55,6 +55,27 @@ class TweetCell: UITableViewCell {
             } else {
                 favoriteCount.hidden = true
             }
+
+            if let favorited = tweet.favorited {
+                if favorited {
+                    favoriteButton.setImage(UIImage(named: "like-action-on"), forState: UIControlState.Normal)
+                } else {
+                    favoriteButton.setImage(UIImage(named: "like-action"), forState: UIControlState.Normal)
+                }
+            } else {
+                favoriteButton.setImage(UIImage(named: "like-action"), forState: UIControlState.Normal)
+            }
+
+            if let retweeted = tweet.retweeted {
+                if retweeted {
+                    retweetButton.setImage(UIImage(named: "retweet-action-on"), forState: UIControlState.Normal)
+                } else {
+                    retweetButton.setImage(UIImage(named: "retweet-action"), forState: UIControlState.Normal)
+                }
+            } else {
+                retweetButton.setImage(UIImage(named: "retweet-action"), forState: UIControlState.Normal)
+            }
+
         }
     }
 
