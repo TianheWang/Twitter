@@ -17,6 +17,10 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var userHandle: UILabel!
 
+    @IBOutlet weak var favoriteLabel: UILabel!
+
+    @IBOutlet weak var followersLabel: UILabel!
+
     var user: User! {
         didSet {
             view.layoutIfNeeded()
@@ -28,6 +32,8 @@ class ProfileViewController: UIViewController {
             }
             userName.text = user.name!
             userHandle.text = "@\(user.screenName!)"
+            followersLabel.text = "\(user.followerCount!)"
+            favoriteLabel.text = "\(user.favoriteCount!)"
         }
     }
 

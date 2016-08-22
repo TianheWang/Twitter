@@ -15,6 +15,8 @@ class User: NSObject {
     var tagLine: String?
     var userData: NSDictionary?
     var backgroundImageUrl: NSURL?
+    var favoriteCount: Int?
+    var followerCount: Int?
 
     init(dictionary: NSDictionary) {
         userData = dictionary
@@ -29,6 +31,8 @@ class User: NSObject {
         if let backgroundURL = backgroundURL {
             backgroundImageUrl = NSURL(string: backgroundURL)
         }
+        favoriteCount = dictionary["favourites_count"] as? Int
+        followerCount = dictionary["followers_count"] as? Int
     }
 
     static var _currrentUser: User?
