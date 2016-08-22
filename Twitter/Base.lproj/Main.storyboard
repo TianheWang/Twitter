@@ -146,6 +146,9 @@
                                                         <constraint firstAttribute="height" constant="19" id="Z4m-cA-rbz"/>
                                                     </constraints>
                                                     <state key="normal" image="reply"/>
+                                                    <connections>
+                                                        <segue destination="DWl-9b-4dg" kind="presentation" identifier="replySegue" id="q9v-mu-uJ9"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ao6-j4-LoV">
                                                     <rect key="frame" x="111" y="179" width="17" height="19"/>
@@ -284,7 +287,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="What's in your mind" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JLB-Yu-yGf">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="What's happening" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JLB-Yu-yGf">
                                 <rect key="frame" x="29" y="95" width="357" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -583,4 +586,7 @@
         <image name="reply" width="65" height="72"/>
         <image name="retweet-action" width="75" height="72"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="q9v-mu-uJ9"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -15,15 +15,19 @@ class NewTweetViewController: UIViewController {
 
     @IBOutlet weak var charLeft: UILabel!
 
+    var prefix: String?
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        tweetText.becomeFirstResponder()
+        if prefix != nil {
+            tweetText.text = prefix!
+            updateCharCount()
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     @IBAction func onCancelButton(sender: AnyObject) {
@@ -44,13 +48,16 @@ class NewTweetViewController: UIViewController {
     }
 
     @IBAction func onEditing(sender: AnyObject) {
+        updateCharCount()
+    }
+
+    private func updateCharCount() {
         var charLeftCount = 0
         if let tweetText = tweetText.text {
-            charLeftCount = 140 - tweetText.characters.count
+        charLeftCount = 140 - tweetText.characters.count
         }
         charLeft.text = "\(charLeftCount) Characters Left"
     }
-
     /*
      // MARK: - Navigation
 

@@ -62,6 +62,14 @@ class TweetsViewController: UIViewController {
             singleTweetViewController.tweet = cell.tweet
         case "newTweetSegue":
             break
+        case "replySegue":
+            let replyButton = sender as! UIButton
+            let cell = replyButton.superview?.superview as! TweetCell
+            let prefix = "@\((cell.tweet!.user?.screenName)!) "
+            let navigationController = segue.destinationViewController as! UINavigationController
+            let newTweetViewController = navigationController.topViewController as! NewTweetViewController
+            newTweetViewController.prefix = prefix
+            break
         default:
             return
         }
