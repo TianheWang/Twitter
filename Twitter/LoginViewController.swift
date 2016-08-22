@@ -31,8 +31,8 @@ class LoginViewController: UIViewController {
 
         TwitterClient.sharedInstance.login({ () -> () in
             print("I've logged in")
-            // segue into next view
-            self.performSegueWithIdentifier("loginSegue", sender: nil)
+            let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            delegate.configViews()
         }, failure: {
                 (error: NSError) -> () in
                 print(error.localizedDescription)

@@ -14,25 +14,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        configViews()
+        // Override point for customization after application launch.
+        return true
+    }
 
+    func configViews() {
         if User.currentUser != nil {
             let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyBoard.instantiateViewControllerWithIdentifier("TweetsNavigationController")
+            let hamburgerViewController = storyBoard.instantiateViewControllerWithIdentifier("hamburgerViewController") as! HamburgerViewController
             // what is rootViewController
-            self.window?.rootViewController = vc
+            self.window?.rootViewController = hamburgerViewController
+
+            let menuViewController = storyBoard.instantiateViewControllerWithIdentifier("menuViewController") as! MenuViewController
+            menuViewController.hamburgerViewController = hamburgerViewController
+            hamburgerViewController.menuViewController = menuViewController
+
         }
 
         NSNotificationCenter.defaultCenter().addObserverForName(TwitterClient.userDidLogoutNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (NSNotification) in
             let storyBoard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyBoard.instantiateInitialViewController()
-            // what is rootViewController
             self.window?.rootViewController = vc
         }
-
-        // Override point for customization after application launch.
-        return true
     }
 
     func applicationWillResignActive(application: UIApplication) {
