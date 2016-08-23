@@ -77,6 +77,8 @@ class TweetCell: UITableViewCell {
                 retweetButton.setImage(UIImage(named: "retweet-action"), forState: UIControlState.Normal)
             }
 
+            timestamp.text = tweet.timeString
+
         }
     }
 

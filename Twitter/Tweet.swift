@@ -11,7 +11,7 @@ import UIKit
 class Tweet: NSObject {
     var id: Int?
     var text: NSString?
-    var timestamp: NSDate?
+    var timeString: String?
     var retweetCount: Int? = 0
     var favoritesCount: Int? = 0
     var user: User?
@@ -19,6 +19,7 @@ class Tweet: NSObject {
     var retweeted: Bool?
 
     init(dictionary: NSDictionary) {
+        super.init()
         id = dictionary["id"] as? Int
         text = dictionary["text"] as? String
         retweetCount = (dictionary["retweet_count"] as? Int) ?? 0
@@ -27,7 +28,8 @@ class Tweet: NSObject {
         if let timestampString = timestampString {
             let formatter = NSDateFormatter()
             formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
-            timestamp = formatter.dateFromString(timestampString)
+            let timestamp = formatter.dateFromString(timestampString)
+            timeString = processedTimeString(timestamp!)
         }
         let userData = dictionary["user"] as? NSDictionary
         user = User(dictionary: userData!)
@@ -44,5 +46,34 @@ class Tweet: NSObject {
         }
 
         return tweets
+    }
+
+    // modified from https://gist.github.com/minorbug/468790060810e0d29545
+    private func processedTimeString(timestamp: NSDate) -> String {
+        let calendar = NSCalendar.currentCalendar()
+        let now = NSDate()
+        let unitFlags: NSCalendarUnit = [.Second, .Minute, .Hour, .Day, .WeekOfYear, .Month, .Year]
+        let components = calendar.components(unitFlags, fromDate: timestamp, toDate: now, options: [])
+
+        if components.year >= 1 || components.month > 1 || components.day > 1 {
+            let formatter = NSDateFormatter()
+            formatter.dateStyle = .MediumStyle
+            formatter.timeStyle = .NoStyle
+            return formatter.stringFromDate(timestamp)
+        }
+
+        if components.hour >= 1 {
+            return "\(components.hour)h ago"
+        }
+
+        if components.minute >= 1 {
+            return "\(components.minute)m ago"
+        }
+
+        if components.second >= 1 {
+            return "\(components.second)s ago"
+        }
+        
+        return "now"
     }
 }
