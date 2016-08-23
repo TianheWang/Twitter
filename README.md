@@ -47,14 +47,19 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
+#### User Login
 <img src='http://i.imgur.com/1kEaI35.gif' title='User Login' width='' alt='User Login' />
 
+#### Home Screen
 <img src='http://i.imgur.com/tQey2Kt.gif' title='Home Screen' width='' alt='Home Screen' />
 
+#### Tweet Detail
 <img src='http://i.imgur.com/AHLcP2O.gif' title='Tweet Detail' width='' alt='Tweet Detail' />
 
+#### New Tweet
 <img src='http://i.imgur.com/DDdcDzW.gif' title='New Tweet' width='' alt='New Tweet' />
 
+#### Side Menu
 <img src='http://i.imgur.com/XUWUo7n.gif' title='Side Menu' width='' alt='Side Menu' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
