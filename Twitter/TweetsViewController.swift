@@ -13,6 +13,8 @@ class TweetsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var tweets: [Tweet]!
+    var isTimeline: Bool = true
+
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -21,12 +23,21 @@ class TweetsViewController: UIViewController {
         tableView.estimatedRowHeight = 120
         tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
 //        ???  look into sharedInstance, sigleton
-        TwitterClient.sharedInstance.homeTimeline({ (tweets: [Tweet]) -> () in
-            self.tweets = tweets
-            self.tableView.reloadData()
-            }, failure: { (error: NSError) -> () in
-                print(error.localizedDescription)
-        })
+        if isTimeline {
+            TwitterClient.sharedInstance.homeTimeline({ (tweets: [Tweet]) -> () in
+                self.tweets = tweets
+                self.tableView.reloadData()
+                }, failure: { (error: NSError) -> () in
+                    print(error.localizedDescription)
+            })
+        } else {
+            TwitterClient.sharedInstance.mentionTimeline({ (tweets: [Tweet]) -> () in
+                self.tweets = tweets
+                self.tableView.reloadData()
+                }, failure: { (error: NSError) -> () in
+                    print(error.localizedDescription)
+            })
+        }
 
 
         // pull to refresh

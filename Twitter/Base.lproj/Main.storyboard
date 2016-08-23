@@ -246,6 +246,7 @@
                                             <outlet property="tweetText" destination="LWR-Dw-DeA" id="Xnu-aP-hc2"/>
                                             <outlet property="userHandle" destination="scf-Tx-htD" id="FAd-zH-goJ"/>
                                             <outlet property="userName" destination="GIx-Ib-wFv" id="U3v-OZ-TdL"/>
+                                            <segue destination="eHa-y0-nxZ" kind="push" identifier="singleTweetSegue" id="g1C-4H-M1Z"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -338,7 +339,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GSK-Ii-iTt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2205" y="1395"/>
+            <point key="canvasLocation" x="2333" y="1427"/>
         </scene>
         <!--Single Tweet View Controller-->
         <scene sceneID="NbH-Ud-GTe">
@@ -776,7 +777,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a0s-Wn-Tw5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1357" y="2215"/>
+            <point key="canvasLocation" x="1413" y="2295"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Yla-3K-0jq">
@@ -795,7 +796,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gTd-kb-Ofc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1643" y="1401"/>
+            <point key="canvasLocation" x="1771" y="1433"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="9FR-Kk-3Fp">
@@ -814,7 +815,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="755" y="2215"/>
+            <point key="canvasLocation" x="747" y="2295"/>
         </scene>
     </scenes>
     <resources>
@@ -824,7 +825,7 @@
         <image name="retweet-action" width="75" height="72"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Xwm-Df-47j"/>
-        <segue reference="vmt-it-KXO"/>
+        <segue reference="q9v-mu-uJ9"/>
+        <segue reference="lJj-Fz-JLk"/>
     </inferredMetricsTieBreakers>
 </document>

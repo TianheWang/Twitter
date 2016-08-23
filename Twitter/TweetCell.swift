@@ -38,6 +38,7 @@ class TweetCell: UITableViewCell {
 //            let now: NSDate = NSDate()
 
             tweetText.text = tweet.text as? String
+            
             if tweet.retweetCount == nil && tweet.retweetCount == 0 {
                 retweetCount.hidden = true
             } else {

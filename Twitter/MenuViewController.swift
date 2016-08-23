@@ -20,9 +20,10 @@ class MenuViewController: UIViewController, UITableViewDelegate {
 
     private var tweetsViewNavigationController: UINavigationController!
     private var profileViewNavigationController: UINavigationController!
+    private var mentionsViewNavigationController: UINavigationController!
 
     var viewControllers: [UINavigationController] = []
-    let titles: [String] = ["Home", "Profile"]
+    let titles: [String] = ["Home", "Profile", "Mentions"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,8 +35,13 @@ class MenuViewController: UIViewController, UITableViewDelegate {
         profileViewNavigationController = storyBoard.instantiateViewControllerWithIdentifier("ProfileNavigationController") as! UINavigationController
         let profileViewController = profileViewNavigationController.topViewController as! ProfileViewController
         profileViewController.user = User.currentUser
+        mentionsViewNavigationController = storyBoard.instantiateViewControllerWithIdentifier("TweetsNavigationController") as! UINavigationController
+        mentionsViewNavigationController.topViewController?.title = "Mentions"
+        (mentionsViewNavigationController.topViewController as! TweetsViewController).isTimeline = false
+
         viewControllers.append(tweetsViewNavigationController)
         viewControllers.append(profileViewNavigationController)
+        viewControllers.append(mentionsViewNavigationController)
 
         hamburgerViewController.contentViewController = tweetsViewNavigationController
 
